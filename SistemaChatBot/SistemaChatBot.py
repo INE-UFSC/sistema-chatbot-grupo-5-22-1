@@ -60,5 +60,3 @@ class SistemaChatBot:
             while inicio:
                 self.le_envia_comando()
 
-sys_bot = SistemaChatBot('Grupo 5',[BotZangado('Raiva')])
-sys_bot.inicio()
