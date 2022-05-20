@@ -1,15 +1,14 @@
 from Bots.Bot import Bot
 from Bots.BotZangado import BotZangado
 
-inicio = True
 
 class SistemaChatBot:
     def __init__(self,nomeEmpresa,lista_bots):
         self.__empresa = nomeEmpresa
         self.__lista_bots = []
-        for i in range(len(lista_bots)):
-            if isinstance(lista_bots[i], Bot):
-                self.__lista_bots.append(lista_bots[i])
+        for bot in lista_bots:
+            if isinstance(bot, Bot):
+                self.__lista_bots.append(bot)
         self.__bot = None
     
     def boas_vindas(self):
@@ -17,19 +16,17 @@ class SistemaChatBot:
 
     def mostra_menu(self):
         print('Os chat bots disponíveis no momento são :')
-        x = 1
-        for bot in self.__lista_bots:
-            print('Bot {} : {} - Mensagem de apresentação : {} '.format(x, bot.nome, bot.apresentacao()))
-            x += 1
+        for index, bot in enumerate(self.__lista_bots):
+            print('Bot {} : {} - Mensagem de apresentação : {} '.format(index+1, bot.nome, bot.apresentacao()))
         print()
 
     def escolhe_bot(self):
-        bot = int(input('Selecione um bot : '))
+        numero_bot = int(input('Selecione um bot : '))
         
-        if bot > len(self.__lista_bots):
+        if numero_bot not in range(len(self.__lista_bots)):
             print('Esse bot não existe')
         else:
-            self.__bot = self.__lista_bots[bot - 1]
+            self.__bot = self.__lista_bots[numero_bot - 1]
             print(self.__bot.boas_vindas(), '\n')
      
     def mostra_comandos_bot(self):
@@ -42,11 +39,10 @@ class SistemaChatBot:
         print()
 
     def le_envia_comando(self):
-        global inicio
         comando = input('Escolha um comando : ')
         if comando == '-1':
-            inicio = False
             print(self.__bot.despedida())
+            return True
         else:
             print('--> {} diz :'.format(self.__bot.nome),
                   self.__bot .executa_comando(comando))
@@ -56,7 +52,8 @@ class SistemaChatBot:
         self.mostra_menu()
         self.escolhe_bot()
         if self.__bot != None:
-            self.mostra_comandos_bot() 
-            while inicio:
-                self.le_envia_comando()
+            while True:
+                self.mostra_comandos_bot()
+                if self.le_envia_comando():
+                    break
 
