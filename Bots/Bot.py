@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import random as r
 
 class Bot(ABC):
 
