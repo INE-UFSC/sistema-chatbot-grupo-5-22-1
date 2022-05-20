@@ -4,10 +4,10 @@ class BotZangado(Bot):
     def __init__(self,nome):
         #self.__nome nao esta como atributo no diagrama
         # self.__nome = nome
-        self.__comandos = {'1' : ('Bom dia', 'Bom dia só se for para você!'),
-                           '2' : ('Qual o seu nome ?', 'Tá surdo ?'),
-                           '3' : ('Quero um conselho', 'Não tenho filho desse tamanho'),
-                           '4' : ('Adeus', 'Finalmente, não aguentava mais!')}
+        self.__comandos = {'1' : ('Bom dia', 'Bom dia! Muito feliz de ter me chamado! :)'),
+                           '2' : ('Qual o seu nome ?', 'Meu nome é BotFeliz, prazer! '),
+                           '3' : ('Quero um conselho', 'Pegue sol! O dia está maravilhoso hoje! :D'),
+                           '4' : ('Adeus', 'Até mais!! Tenha um bom dia!')}
         super().__init__(nome, self.__comandos)
 
 #Esses metodos nao estao no diagrama UML entao estao como comentario
@@ -20,7 +20,7 @@ class BotZangado(Bot):
     #     self.__nome = nome
 
     def apresentacao(self):
-        return 'GRRRRR. Meu nome é {} e eu te odeio.'.format(self.nome)
+        return 'Oláa Meu nome é {}, muito feliz em ter me chamado!.'.format(self.nome)
  
     # def mostra_comandos(self):
     #     pass
@@ -32,7 +32,7 @@ class BotZangado(Bot):
             return 'Esse comando não existe'
 
     def boas_vindas(self):
-        return '--> {} diz : Não posso acreditar qur você me escolheru. GRRRRRRR!'.format(self.nome)
+        return '--> {} diz : Bem vindo!! O dia está muito lindo hoje!'.format(self.nome)
 
     def despedida(self):
-        return '--> {} diz : Espero nunca mais te ver de novo'.format(self.nome)
+        return '--> {} diz : Por favor não vá! Gosto muito de você!'.format(self.nome)
