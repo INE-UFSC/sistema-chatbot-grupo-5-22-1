@@ -21,32 +21,36 @@ class SistemaChatBot:
         print()
 
     def escolhe_bot(self):
-        numero_bot = int(input('Selecione um bot : '))
+        try:
+            numero_bot = int(input('Selecione um bot : '))
+            
+            if numero_bot not in range(len(self.__lista_bots) + 1):
+                print('Esse bot não existe')
+            else:
+                self.__bot = self.__lista_bots[numero_bot - 1]
+                print(self.__bot.boas_vindas(), '\n')
+        except ValueError:
+            print('Digite um número válido para o bot')
         
-        if numero_bot not in range(len(self.__lista_bots)):
-            print('Esse bot não existe')
-        else:
-            self.__bot = self.__lista_bots[numero_bot - 1]
-            print(self.__bot.boas_vindas(), '\n')
-     
     def mostra_comandos_bot(self):
         print('Os comandos são : ')
-        comandos = self.__bot.mostra_comandos().values()
-        x = 1
-        for i in comandos:
-            print(x, '-', i[0],)
-            x += 1
+        comandos = self.__bot.mostra_comandos().comandos
+        for index, comando in enumerate(comandos):
+            print(index + 1 ,'-', comando)
         print()
 
     def le_envia_comando(self):
-        comando = input('Escolha um comando : ')
-        if comando == '-1':
-            print(self.__bot.despedida())
-            return True
-        else:
-            print('--> {} diz :'.format(self.__bot.nome),
-                  self.__bot .executa_comando(comando))
-
+        try:
+            cmd = int(input('Escolha um comando : '))
+            if cmd == -1:
+                print(self.__bot.despedida())
+                return True
+            else:
+                print(f'--> {self.__bot.nome} diz :',
+                    self.__bot .executa_comando(cmd - 1), '\n')
+        except ValueError:
+            print('Digite um número válido para o comando \n')
+    
     def inicio(self):
         self.boas_vindas()
         self.mostra_menu()

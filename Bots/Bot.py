@@ -17,9 +17,17 @@ class Bot(ABC):
     def mostra_comandos(self):
         return self.__comandos
 
-    @abstractmethod
+    def adicionar_comandos(self, comando, resposta):
+        self.__comandos.adicionar_comandos(comando, resposta)
+
+    def remover_comandos(self, comando):
+        self.__comandos.remover_comandos(comando)
+
     def executa_comando(self,cmd):
-        pass
+        try:
+            return self.__comandos.respostas_bot[cmd]
+        except IndexError:
+            print('Esse comando não existe')
 
     @abstractmethod
     def boas_vindas():
